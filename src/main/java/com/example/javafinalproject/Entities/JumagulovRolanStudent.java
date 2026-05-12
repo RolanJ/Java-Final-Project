@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,4 +17,6 @@ public class JumagulovRolanStudent {
     private String name;
     private String email;
 
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<JumagulovRolanEnroll> enrollments;
 }
