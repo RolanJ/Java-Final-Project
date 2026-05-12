@@ -1,6 +1,7 @@
 package com.example.javafinalproject.Controllers;
 
 import com.example.javafinalproject.DTOs.JumagulovRolanStudentDTO;
+import com.example.javafinalproject.Repositories.JumagulovRolanStudentRepository;
 import com.example.javafinalproject.Services.JumagulovRolanStudentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class JumagulovRolanStudentController {
     private final JumagulovRolanStudentService studentService;
+    private final JumagulovRolanStudentRepository studentRepository;
+
+    @GetMapping("/{id}")
+    public JumagulovRolanStudentDTO findById(@PathVariable Long id){
+        log.debug("Searching for user with Id" + id);
+        return studentService.findById(id);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

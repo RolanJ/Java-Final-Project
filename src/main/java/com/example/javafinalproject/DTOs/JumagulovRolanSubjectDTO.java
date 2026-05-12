@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class JumagulovRolanCourseDTO {
+
+public class JumagulovRolanSubjectDTO {
     @NotBlank
     private String name;
+
 }

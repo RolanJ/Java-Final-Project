@@ -14,10 +14,16 @@ public class JumagulovRolanStudentService {
     private final JumagulovRolanStudentRepository studentRepository;
     private final JumagulovRolanStudentMapper studentMapper;
 
+
     public JumagulovRolanStudentDTO createStudent(JumagulovRolanStudentDTO dto) {
         JumagulovRolanStudent student = studentMapper.toEntity(dto);
         JumagulovRolanStudent savedStudent = studentRepository.save(student);
         return studentMapper.toDto(savedStudent);
+    }
+    public JumagulovRolanStudentDTO findById(Long id) {
+        return studentRepository.findById(id).map(studentMapper::toDto)
+                .orElseThrow(()-> new RuntimeException("Student with ID " + id + " Not found"));
+
     }
     @Transactional
     public void deleteStudent(Long id) {
