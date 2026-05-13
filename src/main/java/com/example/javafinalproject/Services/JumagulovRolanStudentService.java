@@ -10,8 +10,10 @@ import com.example.javafinalproject.Repositories.JumagulovRolanEnrollRepository;
 import com.example.javafinalproject.Repositories.JumagulovRolanStudentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class JumagulovRolanStudentService {
@@ -19,11 +21,17 @@ public class JumagulovRolanStudentService {
     private final JumagulovRolanStudentMapper studentMapper;
     private final JumagulovRolanCourseRepository courseRepository;
     private final JumagulovRolanEnrollRepository enrollRepository;
+    private final JumagulovRolanNotificationService notifService;
 
 
+    @Transactional
     public JumagulovRolanStudentDTO createStudent(JumagulovRolanStudentDTO dto) {
         JumagulovRolanStudent student = studentMapper.toEntity(dto);
         JumagulovRolanStudent savedStudent = studentRepository.save(student);
+        log.info("creating student + sending email");
+
+        notifService.sendNotification("dzhumagulovrolan@gmail.com", "");
+
         return studentMapper.toDto(savedStudent);
     }
     public JumagulovRolanStudentDTO findById(Long id) {
