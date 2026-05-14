@@ -11,6 +11,8 @@ import com.example.javafinalproject.Repositories.JumagulovRolanStudentRepository
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -51,6 +53,11 @@ public class JumagulovRolanStudentService {
         enroll.setCourse(course);
         enroll.setStatus("Enrolled");
         enrollRepository.save(enroll);
+    }
+
+    public Page<JumagulovRolanStudentDTO> findAll(Pageable pageable){
+        return studentRepository.findAll(pageable)
+                .map(studentMapper::toDto);
     }
 
     @Transactional
