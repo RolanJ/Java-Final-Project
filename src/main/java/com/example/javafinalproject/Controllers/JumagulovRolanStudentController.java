@@ -50,6 +50,13 @@ public class JumagulovRolanStudentController {
         return studentService.createStudent(dto);
 
     }
+
+    @PutMapping("/{id}")
+    public JumagulovRolanStudentDTO updateStudent(@PathVariable Long id, @Valid @RequestBody JumagulovRolanStudentDTO dto) {
+        log.info("Updated student");
+        return studentService.updateStudent(id, dto);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteStudent(@PathVariable Long id){

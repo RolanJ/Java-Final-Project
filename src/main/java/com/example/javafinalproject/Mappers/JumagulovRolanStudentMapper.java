@@ -10,6 +10,9 @@ import org.mapstruct.MappingTarget;
 public interface JumagulovRolanStudentMapper {
     JumagulovRolanStudentDTO toDto (JumagulovRolanStudent jumagulovRolanStudent);
 
+    @Mapping(target = "id", ignore = true)
+    void updateStudent(JumagulovRolanStudentDTO dto, @MappingTarget JumagulovRolanStudent student);
+
     @Mapping(target = "id", ignore = true )
     JumagulovRolanStudent toEntity (JumagulovRolanStudentDTO dto);
 

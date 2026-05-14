@@ -4,6 +4,7 @@ import com.example.javafinalproject.DTOs.JumagulovRolanStudentDTO;
 import com.example.javafinalproject.Entities.JumagulovRolanCourse;
 import com.example.javafinalproject.Entities.JumagulovRolanEnroll;
 import com.example.javafinalproject.Entities.JumagulovRolanStudent;
+import com.example.javafinalproject.Exceptions.ResourceNotFoundException;
 import com.example.javafinalproject.Mappers.JumagulovRolanStudentMapper;
 import com.example.javafinalproject.Repositories.JumagulovRolanCourseRepository;
 import com.example.javafinalproject.Repositories.JumagulovRolanEnrollRepository;
@@ -53,6 +54,15 @@ public class JumagulovRolanStudentService {
         enroll.setCourse(course);
         enroll.setStatus("Enrolled");
         enrollRepository.save(enroll);
+    }
+
+    @Transactional
+    public JumagulovRolanStudentDTO updateStudent(Long id, JumagulovRolanStudentDTO dto) {
+        JumagulovRolanStudent student = studentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
+
+        studentMapper.updateStudent(dto, student);
+        return studentMapper.toDto(studentRepository.save(student));
     }
 
     public Page<JumagulovRolanStudentDTO> findAll(Pageable pageable){
