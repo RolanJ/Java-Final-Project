@@ -42,7 +42,7 @@ public class JumagulovRolanJwtUtils {
         return false;
     }
 
-    public String getUserNameFromJwtToken(String token) {
+    public String getUsernameFromToken(String token) {
         return Jwts.parser()
                 .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
                 .build()
