@@ -10,14 +10,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-@Builder
 @Component
 @Slf4j
 public class JumagulovRolanJwtUtils {
     @Value("${app.jwt.secret}")
     private String jwtSecret;
 
-    @Value("${app.jwt.expirationMs")
+    @Value("${app.jwt.expirationMs}")
     private int jwtExpirationMs;
 
     public String generateJwtToken(String username) {
